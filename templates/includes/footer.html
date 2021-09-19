@@ -48,8 +48,8 @@
 								<p>MyTech, your technology.</p>
 								<ul class="footer-links">
 									<li><a href="#"><i class="fa fa-map-marker"></i>1234 Django Ave </a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+0123456789</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+									<li><a href="tel:+012456789"><i class="fa fa-phone"></i>Call us</a></li>
+									<li><a href="mailto:email@example.com"><i class="fa fa-envelope-o"></i>Email us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -58,10 +58,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="#">Desktops</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Gaming Consoles</a></li>
+								{% for catg in cat_links %}
+									<li><a href="{{ catg.get_url }}">{{ catg.name }}</a></li>
+									{% endfor %}
 								</ul>
 							</div>
 						</div>

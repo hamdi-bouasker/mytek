@@ -50,6 +50,9 @@
 							<p>{{ single_product.description }}</p>
                             {% if single_product.stock < 1 %}							
 								<h6 style="color:red">out of stock</h6>								
+								{% elif in_cart %}
+								<a href="#" style="margin-bottom:1em;" class="btn btn-success">added to cart <i class="fa fa-check"></i></a>
+								<a href="{% url 'cart' %}" style="margin-bottom:1em;" class="btn btn-primary">View cart <i class="fa fa-eye"></i></a>
 								{% else %}
 							<div class="add-to-cart">
 								<div class="qty-label">
@@ -59,10 +62,8 @@
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
-								</div>
-								
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							    
+								</div>								
+								<a href="{% url 'add_cart' single_product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</a>		    
 							</div>
                             {% endif %}
 							<ul class="product-btns">
@@ -71,10 +72,8 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								<li><a href="#">{{ single_product.category }}</a></li>
-								
+								<li><a href="#">{{ single_product.category }}</a></li>								
 							</ul>
-
 							<ul class="product-links">
 								<li>Share:</li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>

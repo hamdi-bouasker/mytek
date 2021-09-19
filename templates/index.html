@@ -59,7 +59,7 @@
 											</div>
 											{% else %}
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<a href="{% url 'add_cart' product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</a>
 											</div>
 											{% endif %}
 										</div>

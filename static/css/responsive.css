@@ -7,9 +7,7 @@
 }
 @media (max-width: 992px) {
   /* small tablet devices */
-  .slider-main .item-slide {
-    height: auto;
-  }
+
 
   .table-shopping-cart tr td:first-child {
     width: 250px;
@@ -29,22 +27,6 @@
 
   .mobile-hide {
     display: none;
-  }
-
-  .section-header .logo {
-    max-height: 40px;
-    width: auto;
-  }
-  .section-header .header-main .brand-wrap {
-    margin-bottom: 1rem;
-    display: inline-block;
-  }
-  .section-header .header-main .search {
-    margin-bottom: 1rem;
-  }
-
-  .item-feature {
-    margin-bottom: 20px;
   }
 
   .mobile-order-first {
@@ -74,10 +56,6 @@
 
   .mobile-pt {
     padding-top: 20px;
-  }
-
-  .navbar-expand .navbar-collapse {
-    flex-direction: column;
   }
 }
 

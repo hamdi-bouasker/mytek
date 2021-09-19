@@ -123,12 +123,7 @@
 									</select>
 								</label>
 
-								{% comment %} <label>
-									Show:
-									<select class="input-select">
-										<option value="0">{{ product_count }}</option>
-									</select>
-								</label> {% endcomment %}
+								
 							</div>
 							<ul class="store-grid">
 								<li class="active"><i class="fa fa-th"></i></li>
@@ -174,7 +169,7 @@
 											</div>
 											{% else %}
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<a href="{% url 'add_cart' product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
 									</div>
 									{% endif %}
 								</div>

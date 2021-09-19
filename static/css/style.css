@@ -1884,6 +1884,10 @@ textarea.input {
   clear: both;
 }
 
+#categelems:hover {
+	color:red;
+}
+
 .order-summary .order-col>div {
   display: table-cell;
   padding: 10px 0px;
