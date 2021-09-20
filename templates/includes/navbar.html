@@ -36,15 +36,15 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								<form action="{% url 'search' %}" method="GET">
 									<select class="input-select" onchange="if (this.value) window.location.href=this.value">
-									<option value="">All Categories</option>
+									<option>All Categories</option>
 									{% for catg in cat_links %}
 										<option value="{{ catg.get_url }}">{{ catg.name | truncatewords:"1" }}</option>
 						            {% endfor %}
 									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
+									<input class="input" placeholder="Search here" name="keyword">
+									<button class="search-btn" type="submit">Search</button>
 								</form>
 							</div>
 						</div>

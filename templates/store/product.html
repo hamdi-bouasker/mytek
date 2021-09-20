@@ -54,15 +54,7 @@
 								<a href="#" style="margin-bottom:1em;" class="btn btn-success">added to cart <i class="fa fa-check"></i></a>
 								<a href="{% url 'cart' %}" style="margin-bottom:1em;" class="btn btn-primary">View cart <i class="fa fa-eye"></i></a>
 								{% else %}
-							<div class="add-to-cart">
-								<div class="qty-label">
-									Qty
-									<div class="input-number">
-										<input type="number">
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
-									</div>
-								</div>								
+							<div class="add-to-cart">						
 								<a href="{% url 'add_cart' single_product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</a>		    
 							</div>
                             {% endif %}

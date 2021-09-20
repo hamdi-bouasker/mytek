@@ -33,62 +33,6 @@
 
 						<!-- aside Widget -->
 						<div class="aside">
-							<h3 class="aside-title">Brand</h3>
-							<div class="checkbox-filter">
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-1">
-									<label for="brand-1">
-										<span></span>
-										SAMSUNG
-										<small>(578)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-2">
-									<label for="brand-2">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-3">
-									<label for="brand-3">
-										<span></span>
-										SONY
-										<small>(755)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-4">
-									<label for="brand-4">
-										<span></span>
-										SAMSUNG
-										<small>(578)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-5">
-									<label for="brand-5">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-6">
-									<label for="brand-6">
-										<span></span>
-										SONY
-										<small>(755)</small>
-									</label>
-								</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
 							<h3 class="aside-title">Top selling</h3>
 							{% for product in topSelling_products %}
 							<div class="product-widget">
@@ -135,9 +79,10 @@
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->
+							{% if products %}															
 							{% for product in products %}
-							<div class="col-md-4">
-								<div class="product">
+							<div class="col-md-3">									
+								<div class="product">								
 									<div class="product-img">
 										<img src="{{ product.product_image.url }}" alt="{{ product.alt_text }}">
 										{% if product.discount_price > 0 %}
@@ -145,7 +90,7 @@
 													<span class="sale">{{ product.discount_percentage }}%</span>
 													<span class="new">DISCOUNT</span>
 												</div>
-												{% endif %}
+										{% endif %}
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{ product.category }}</p> 
@@ -171,26 +116,61 @@
 									<div class="add-to-cart">
 										<a href="{% url 'add_cart' product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
 									</div>
-									{% endif %}
-								</div>
+									{% endif %}																
+							    </div>
 							</div>
-							<div class="clearfix visible-sm visible-xs"></div>
-							{% endfor %}
 							<!-- /product -->
+							{% endfor %}
+							{% else %}
+							<div>
+							<h4>No items found.</h4>
 							</div>
+							{% endif %}
+						</div>
 						<!-- /store products -->
-							
                             
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
-							<span class="store-qty">Showing 20-100 products</span>
+
+						{% if products.has_other_pages %}
+
 							<ul class="store-pagination">
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
+							    {% if products.has_previous %}
+
+							    <li><a href="?page={{products.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+
+                                {% else %}
+
+								<li style="pointer-events:none;"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+
+                                {% endif %}
+
+                                {% for num in products.paginator.page_range %} 
+
+								  {% if products.number == num %}
+
+								      <li class="active">{{num}}</li>
+									
+								  {% else %}
+      
+	                                  <li><a href="?page={{num}}">{{num}}</a></li>
+								      
+                                  {% endif %}
+
+								{% endfor %}
+
+								{% if products.has_next %}
+
+								
+								<li><a href="?page={{products.next_page_number}}"><i class="fa fa-angle-right"></i></a></li>
+
+								{% else%}
+
+								<li style="pointer-events:none;"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+								{% endif %}
 							</ul>
+							{% endif %}
 						</div>
 						<!-- /store bottom filter -->
 					</div>
