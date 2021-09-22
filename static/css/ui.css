@@ -189,4 +189,10 @@ dl[class=row] {
   margin-right: 5px;
   display: block;
 }
+
+#signup-section {
+  width: 600px; 
+  margin: auto;
+}
+
 /*# sourceMappingURL=ui.css.map */

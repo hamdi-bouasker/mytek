@@ -5,13 +5,24 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +0123456789</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1234 Django Ave</a></li>
+						<li><a href="tel:+012456789"><i class="fa fa-phone"></i> Call us</a></li>
+						<li><a href="mailto:email@example.com"><i class="fa fa-envelope-o"></i> Email us</a></li>
+						<li><a href="https://g.page/DjangoGuitars?share" target="_blank"><i class="fa fa-map-marker"></i> Get Directions</a></li>
 					</ul>
-					<ul class="header-links pull-right">
+					<ul class="header-links pull-right" style="margin-right:3em;">
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+						<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user-o"></i> My Account</a>
+						<ul class="dropdown-menu" style="background-color:black; color:red;">
+						{% if user.is_authenticated %}
+						<li><a href="{% url 'dashboard' %}" style="background-color:black; color:white;" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='white'">Dashboard</a></li>
+						<li><a href="{% url 'logout' %}" style="background-color:black; color:white;" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='white'">Logout</a></li>
+						{% else %}
+						<li><a href="{% url 'login' %}" style="background-color:black; color:white;" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='white'">Login</a></li>
+						<li><a href="{% url 'register' %}" style="background-color:black; color:white;" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='white'">Register</a></li>
+						{% endif %}
+						</ul>
+					</li>
 					</ul>
 				</div>
 			</div>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- container -->
+<div class="container center" style="justify-content:center; padding-left:25%;">
+
+{% if request.GET.command == 'verification' %}
+
+<div class="container mx-auto" role="alert"  style="width:70%; margin-top:40px;">
+
+<p>Thank you for registering an account with us. Go to {{ request.GET.email }} and click on the activation link.</p>
+
+</div>
+
+{% else %}
+
+
+	<div class="card mx-auto" style="width:70%; margin-top:40px;">
+      <div class="card-body">
+
+      <h4 class="card-title mb-4">Sign in</h4>
+      {% include 'includes/alerts.html' %}
+
+      <form action="{% url 'login' %}" method='POST'>
+      {% csrf_token %}
+          <div class="form-group">
+			 <input type="email" class="form-control" placeholder="Email Address" >
+          </div> <!-- form-group// -->
+          <div class="form-group">
+			<input type="password" class="form-control" placeholder="Password" >
+          </div> <!-- form-group// -->
+          
+          <div class="form-group">
+          	<a href="{% url 'forgot_password' %}" class="float-right">Forgot password?</a> 
+           
+          </div> <!-- form-group form-check .// -->
+          <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block" style="background-color:black; color:red; border-color: #D10024;"> Login  </button>
+          </div> <!-- form-group// -->    
+      </form>
+      </div> <!-- card-body.// -->
+       <p style="text-align:center;">Don't have account? <a href="{% url 'register' %}">Sign up</a></p>
+    </div> <!-- card .// -->
+    {% endif %}
+</div>
+
+{% endblock content %}
