@@ -143,9 +143,9 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-mail.outlook.com'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "testing_my_software@outlook.com"
-EMAIL_HOST_PASSWORD = "hb18111982HB"
+EMAIL_HOST_USER = "michael.smith7nov@gmail.com"
+EMAIL_HOST_PASSWORD = "2=9iK_sANMRo%0"

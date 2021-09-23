@@ -37,13 +37,10 @@ class MyAccountManager(BaseUserManager):
 
         return user
 
-
-
 class Account(AbstractBaseUser):
     f_name = models.CharField(max_length=50)
     l_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, unique=True)
-
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)

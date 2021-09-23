@@ -6,13 +6,10 @@
 		
 <!-- container -->
 <div class="container center" style="justify-content:center; padding-left:25%;">
-	
-				
     <div class="card mx-auto" style="width:70%; margin-top:40px;">
       <article class="card-body">
-	  
+	  {% include 'includes/alerts.html' %}
 		<header class="mb-4" style="text-align:center;"><h4 class="card-title">Sign up</h4></header>
-		{% include 'includes/alerts.html' %}
 		<form action="{% url 'register' %}" method='POST'>
 		{% csrf_token %}
 				<div class="form-row">
@@ -42,13 +39,11 @@
 					</div> <!-- form-group end.// -->  
 				</div>
 			    <div class="form-group">
-			        <button type="submit" class="btn btn-primary btn-block" style="background-color:black; color:red; border-color: #D10024;"> Register  </button>
-			       
+			        <button type="submit" class="btn btn-primary btn-block" style="background-color:black; color:red; border-color: #D10024;"> Register  </button>			       
 				</div> <!-- form-group// -->  
-				 
-			       </div> <!-- form-row.// --> 
-				   {{ form.email.errors }}
-				 {{ form.non_field_errors }}   
+				    {{ form.email.errors }}
+				    {{ form.non_field_errors }}
+			       </div> <!-- form-row.// -->    
 			</form>
 		</article><!-- card-body.// -->		
 	</div> <!-- card .// -->  
