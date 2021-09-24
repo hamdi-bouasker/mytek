@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -62,23 +62,25 @@
 								<div><strong>PRODUCT</strong></div>
 								<div><strong>TOTAL</strong></div>
 							</div>
+							{% for item in cart_items %}
 							<div class="order-products">
-								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00</div>
+								<div class="order-col">								   
+									<div>{{item.product.name}} <b>x {{item.quantity}}</b></div>
+									<div>${{item.subtotal}}</div>									
 								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
-							</div>
+                            {% endfor %}
 							<div class="order-col">
 								<div>Shiping</div>
-								<div><strong>FREE</strong></div>
+								<div><strong>${{shipping_price}}</strong></div>
 							</div>
 							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div>Tax</div>
+								<div><strong>${{tax}}</strong></div>
+							</div>
+							
+							<div class="order-col">
+								<div><strong>GRAND TOTAL</strong></div>
+								<div><strong class="order-total">${{grand_total}}</strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -120,7 +122,7 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" type="submit" name="submit" class="primary-btn order-submit" style="background-color:black;color:#ff0000;">Place order</a>
+						<button href="#" type="submit" name="submit" class="primary-btn order-submit btn-block" style="background-color:black;color:#ff0000;">Place order</button>
 						<a href="{% url 'store' %}" class="primary-btn order-submit" style="background-color:black;color:#ff0000;">Continue shopping</a>
 					</div>
 					</form>

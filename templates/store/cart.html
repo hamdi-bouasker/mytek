@@ -90,7 +90,7 @@
 			<p class="text-center mb-3">
 				<img src="{% static 'img/payments.png' %}" height="26">
 			</p>
-			<a href="#" style="background-color:black;color:#ff0000;" class="btn btn-block"> Checkout </a>
+			<a href="{% url 'checkout' %}" style="background-color:black;color:#ff0000;" class="btn btn-block"> Checkout </a>
 			<a href="{% url 'store' %}" style="background-color:black;color:#ff0000;" class="btn btn-light btn-block">Continue Shopping</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
