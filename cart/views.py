@@ -99,7 +99,6 @@ def cart(request, total=0, quantity=0, cart_items=None):
     try:
         tax = 0
         grand_total = 0
-
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
@@ -108,14 +107,14 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
         for item in cart_items:
             if item.product.discount_price:
-                total += (item.product.discount_price * item.quantity)
+                total += round((item.product.discount_price * item.quantity), 2)
                 quantity += item.quantity
             else:
-                total += (item.product.price * item.quantity)
+                total += round((item.product.price * item.quantity), 2)
                 quantity += item.quantity
 
-        tax = (2 * total) / 100
-        grand_total = tax + total 
+        tax = round(((2 * total) / 100), 2)
+        grand_total = round((tax + total), 2) 
 
     except ObjectDoesNotExist:
         pass

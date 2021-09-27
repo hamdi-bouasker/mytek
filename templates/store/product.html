@@ -216,10 +216,13 @@
 										<!-- Review Form -->
 										<div class="col-md-3">
 											<div id="review-form">
-												<form class="review-form">
-													<input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email">
-													<textarea class="input" placeholder="Your Review"></textarea>
+											     {% include 'includes/alerts.html' %}
+												<form class="review-form" action="{% url 'submit_review' single_product.id %}" method="POST">
+												 {% csrf_token %}
+													{% comment %} <input class="input" type="text" placeholder="Your Name">
+													<input class="input" type="email" placeholder="Your Email"> {% endcomment %}
+													<input class="input" type="text" placeholder="Title" name="subject">
+													<textarea class="input" placeholder="Your Review" name="review"></textarea>
 													<div class="input-rating">
 														<span>Your Rating: </span>
 														<div class="stars">

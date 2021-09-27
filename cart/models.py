@@ -18,7 +18,8 @@ class CartItem(models.Model):
 
     def subtotal(self):
         if self.product.discount_price:
-                return self.product.discount_price * self.quantity
+                theprice = self.product.discount_price * self.quantity
+                return round(theprice, 2)
         else:
             return self.product.price * self.quantity
 

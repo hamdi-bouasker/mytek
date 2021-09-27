@@ -1,10 +1,14 @@
+from django.http import JsonResponse
+from store.models import Product
 from django.shortcuts import render, redirect
 from cart.models import CartItem
 from .forms import OrderForm
-from .models import Order, Payment
+from .models import Order, OrderProduct, Payment
 import datetime
 from django.contrib import messages
 import json
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 
 def place_order(request, total=0, quantity=0):
     current_user = request.user
@@ -16,17 +20,18 @@ def place_order(request, total=0, quantity=0):
 
     grand_total = 0
     tax = 0
+    total = 0
     shipping_price = 20 # to be developped to calculate shipping price on distance basis
     for item in cart_items:
             if item.product.discount_price:
-                total += (item.product.discount_price * item.quantity)
+                total += round(((item.product.discount_price) * item.quantity), 2)
                 quantity += item.quantity
             else:
-                total += (item.product.price * item.quantity)
+                total += round(((item.product.price) * item.quantity), 2)
                 quantity += item.quantity
 
-    tax = (2 * total) / 100
-    grand_total = tax + total 
+    tax = round(((2 * total) / 100), 2)
+    grand_total = round((tax + total + shipping_price), 2) 
     
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -90,4 +95,61 @@ def payment(request):
     order.payment = payment
     order.is_ordered = True
     order.save()
-    return render(request, 'orders/payment.html')
+
+    cart_items = CartItem.objects.filter(user=request.user)
+    for item in cart_items:
+        orderproduct = OrderProduct()
+        orderproduct.order_id = order.id
+        orderproduct.payment = payment
+        orderproduct.user_id = request.user.id
+        orderproduct.product_id = item.product_id
+        orderproduct.quantity = item.quantity
+        orderproduct.product_price = item.product.price
+        orderproduct.ordered = True
+        orderproduct.save()
+
+        product = Product.objects.get(id=item.product_id)
+        product.stock -= item.quantity
+        product.save()
+
+    CartItem.objects.filter(user=request.user).delete()
+
+    subject = 'Account activation'
+    body = render_to_string('orders/order_received_email.html', {
+        'user': request.user,
+        'order': order,
+    })
+    to_email = request.user.email
+    send_email = EmailMessage(subject, body, to=[to_email])
+
+    data = {
+        'order_number': order.order_number,
+        'transactionID': payment.payment_id
+    }
+
+    return JsonResponse(data)
+
+def order_completed(request):
+    order_number = request.GET.get('order_number')
+    transactionID = request.GET.get('payment_id')
+    payment = Payment.objects.get(payment_id=transactionID)
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        ordered_products = OrderProduct.objects.filter(order_id=order.id)
+        subtotal = 0
+        for prod in ordered_products:
+            subtotal += (prod.product_price * prod.quantity)
+
+        context = {
+            'order': order,
+            'ordered_products': ordered_products,
+            'ordder_number': order.order_number,
+            'transactionID': payment.payment_id,
+            'payment': payment,
+            'subtotal': subtotal,
+        }
+        return render(request, 'orders/order_completed.html', context)
+        
+    except (Payment.DoesNotExist, Order.DoesNotExist):
+        return redirect('index')
+    
