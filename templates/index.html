@@ -41,13 +41,34 @@
 												<p class="product-category">{{ product.category }}</p> 
 												<h3 class="product-name">{{ product.name | truncatewords:"10" }}</h3>
 												<h4 class="product-price">{% if product.discount_price %} ${{ product.discount_price }} <del class="product-old-price">${{ product.price }}</del></h4>{% else %}<h4>${{ product.price }}</h4>{% endif %}
+												 
 												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
+												   
+													{% if single_product.average_rating == 1 %}
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 2 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 3 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 4 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 5 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 0 %}
+														<i class="fa fa-star-o empty"></i>
+														{% endif %}
 												</div>
+												
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 													<button class="quick-view"><a href="{{ product.get_url}}"><i class="fa fa-eye"></i></a><span class="tooltipp">quick view</span></button>

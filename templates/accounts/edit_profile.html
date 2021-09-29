@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+			{% include 'includes/alerts.html' %}
+				<!-- row -->
+				<div class="row">
+                {% include 'includes/dashboard_sidebar.html' %}
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Edit your profile</h3>
+							</div>
+
+							<form action="{% url 'edit_profile' %}" method='POST'>
+							{% csrf_token %}
+                            <label>First name</label> 
+							<div class="form-group">
+								{{user_form.f_name}}
+							</div>
+							<label>Last name</label>
+							<div class="form-group">
+								{{user_form.l_name}}
+							</div>
+							<label>Phone</label>
+							<div class="form-group">
+								{{user_form.tel}}
+							</div>
+							<label>Address</label>
+							<div class="form-group">
+								{{profile_form.address}}
+							</div>
+							<label>City</label>
+							<div class="form-group">
+								{{profile_form.city}}
+							</div>
+							<label>State</label>
+							<div class="form-group">
+								{{profile_form.state}}
+							</div>
+							<label>Country</label>
+							<div class="form-group">
+								{{profile_form.country}}
+							</div>
+							<div class="form-group">
+             					 <button type="submit" class="btn btn-primary btn-block" style="background-color:black; color:red; border-color: #D10024;"> Save  </button>
+          					</div> <!-- form-group// -->  
+                            </form>
+						</div>
+						<!-- /Billing Details -->
+					</div>
+                        <!-- col -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+
+{% endblock content %}

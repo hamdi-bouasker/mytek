@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from category.models import Category
 from accounts.models import Account
-
+from django.db.models import Avg
 class Product(models.Model):
     category = models.ForeignKey(Category, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, unique=True)
@@ -37,6 +37,13 @@ class Product(models.Model):
             theprice = self.price - ((self.price * self.discount_percentage) / 100)
             return round(theprice, 2)
     discount_price = property(discountPrice)
+
+    def average_rating(self):
+        reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(average=Avg('rating'))
+        avg = 0
+        if reviews['average'] is not None:
+            avg = int(reviews['average'])
+        return avg
 
     class Meta:
         ordering = ("-created_at",)

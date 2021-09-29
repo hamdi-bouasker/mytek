@@ -17,7 +17,7 @@
 								<h3 class="title">Billing address</h3>
 							</div>
 
-							<form action={% url 'place_order' %} method='POST'>
+							<form action="{% url 'place_order' %}" method='POST'>
 							{% csrf_token %}
 
 							<div class="form-group">

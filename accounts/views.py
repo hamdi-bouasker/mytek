@@ -1,7 +1,7 @@
-from accounts.models import Account
-from accounts.forms import RegistrationForm
-from django.shortcuts import render, redirect
-from .forms import RegistrationForm
+
+from .models import Account, Profile
+from.forms import RegistrationForm, UserForm, UserProfileForm 
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
@@ -12,7 +12,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages, auth
 from cart.models import Cart, CartItem
 from cart.views import _cart_id
-import requests
+from orders.models import Order, OrderProduct
+
 
 def register(request):
     if request.method == 'POST': 
@@ -21,9 +22,10 @@ def register(request):
             f_name = form.cleaned_data['f_name']
             l_name = form.cleaned_data['l_name']
             email = form.cleaned_data['email']
+            tel = form.cleaned_data['tel']
             #username = form.cleaned_data['email'].split('@')
             password = form.cleaned_data['password']
-            user = Account.objects.create_user(f_name=f_name, l_name=l_name, email=email, password=password)
+            user = Account.objects.create_user(f_name=f_name, l_name=l_name, email=email, tel=tel, password=password)
             #user.is_active = False
             user.save()
 
@@ -82,29 +84,17 @@ def login(request):
             except:
                 pass
             auth.login(request, user)
-            url = request.META.get('HTTP_REFRER')
-            try:
-                query = requests.utils.urlparse(url).query
-                params = dict(x.split('=') for x in query.split('&'))
-                if 'next' in params:
-                    nextPage = params['next']
-                    return redirect(nextPage)
-            except:
-                return redirect('dashboard')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid credentials!')
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-@login_required(login_url='login')
+@login_required(login_url='/login/')
 def logout(request):
     auth.logout(request)
     messages.success(request, 'Your are logged out.')
     return redirect('login')
-
-@login_required(login_url='login')
-def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
 
 def forgot_password(request):
     if request.method == 'POST':
@@ -162,6 +152,87 @@ def reset_password(request):
             return redirect('reset_password')
     else:
         return render(request, 'accounts/reset_password.html')
+
+@login_required
+def dashboard(request):
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders_count = orders.count()
+    context = {
+        'orders_count': orders_count,
+    }
+    return render(request, 'accounts/dashboard.html', context)
+
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    return render(request, 'accounts/my_orders.html', {'orders': orders})
+
+@login_required
+def edit_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':   
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is successfully updated.')
+            return redirect('edit_profile')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+
+    return render(request, 'accounts/edit_profile.html', context)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['currentpassword']
+        new_password = request.POST['newpassword']
+        confirm_password = request.POST['confirmpassword']
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            ok = user.check_password(current_password)
+            if ok:
+                user.set_password(confirm_password)
+                user.save()
+                #auth.logout(request)
+                messages.success(request, 'Password successfully updated.')
+                return redirect('change_password')
+            else:
+                messages.error(request, 'Wrong current password! Please retype it.')
+                return render(request, 'accounts/change_password.html')
+        else:
+            messages.error(request, 'Passwords did not match! Please try again.')
+            return render(request, 'accounts/change_password.html')
+
+    return render(request, 'accounts/change_password.html')
+
+@login_required
+def order_detail(request, order_id):
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    order = Order.objects.get(order_number=order_id)
+    subtotal = 0
+    for prod in order_detail:
+        subtotal += round((prod.product_price * prod.quantity), 2)  
+    context = {
+        'order_detail': order_detail,
+        'order': order,
+        'subtotal': subtotal,
+    }
+    return render(request, 'accounts/order_detail.html', context)
+
+
+
+
+
+
 
 
 

@@ -1,9 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-
 class MyAccountManager(BaseUserManager):
-    def create_user(self, f_name, l_name, email, password=None):
+    def create_user(self, f_name, l_name, email, tel, password=None):
         if not email:
             raise ValueError('Please provide valid email address.')
 
@@ -13,7 +13,8 @@ class MyAccountManager(BaseUserManager):
         user = self.model(
             email = self.normalize_email(email),
             f_name = f_name,
-            l_name = l_name
+            l_name = l_name,
+            tel=tel
         )
 
         user.set_password(password)
@@ -41,6 +42,7 @@ class Account(AbstractBaseUser):
     f_name = models.CharField(max_length=50)
     l_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, unique=True)
+    tel = models.CharField(max_length=50, unique=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)
@@ -53,6 +55,9 @@ class Account(AbstractBaseUser):
 
     objects = MyAccountManager()
 
+    def fullname(self):
+        return f"{self.f_name} {self.l_name}"
+
     def __str__(self):
         return self.email
 
@@ -61,4 +66,25 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
+
+class Profile(models.Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    address = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    state = models.CharField(max_length=100, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.user.f_name
+
+    def fulllocation(self):
+        return f"{self.city}, {self.state}, {self.country}"
+
+
+# @receiver(post_save, sender=UserProfile)
+# def update_profile_signal(sender, instance, created, **kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)
+#     instance.profile.save()
+
 

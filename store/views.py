@@ -1,3 +1,4 @@
+from orders.models import OrderProduct
 from .forms import ReviewForm
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, ReviewRating
@@ -37,7 +38,24 @@ def product_detail(request, category_slug, product_slug):
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
     except Exception as e:
         raise e
-    return render(request, 'store/product.html', {'single_product': single_product, 'in_cart': in_cart}) 
+
+    try:
+        orderproduct = OrderProduct.objects.filter(user=request.user.id, product_id = single_product.id).exists()
+    except OrderProduct.DoesNotExist:
+        orderproduct = None
+
+    reviews = ReviewRating.objects.filter(product_id = single_product.id, status=True)
+    reviews_count = reviews.count()
+
+    context = {
+        'single_product': single_product, 
+        'in_cart': in_cart,
+        'orderproduct': orderproduct,
+        'reviews': reviews,
+        'reviews_count': reviews_count,
+    }
+    
+    return render(request, 'store/product.html', context) 
 
 def search(request): 
     if 'keyword' in request.GET:
@@ -77,7 +95,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         
     return render(request, 'store/checkout.html', context)
 
-@login_required(login_url='login')
+
 def submit_review(request, product_id):
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
@@ -104,7 +122,7 @@ def submit_review(request, product_id):
                 messages.success(request, 'Review created.')
                 return redirect(url)
 
-                
+
 
 
 
