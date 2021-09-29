@@ -1,7 +1,7 @@
 from orders.models import OrderProduct
 from .forms import ReviewForm
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, ReviewRating
+from .models import Product, ProductGallery, ReviewRating
 from category.models import Category
 from cart.models import Cart, CartItem
 from cart.views import _cart_id
@@ -46,6 +46,7 @@ def product_detail(request, category_slug, product_slug):
 
     reviews = ReviewRating.objects.filter(product_id = single_product.id, status=True)
     reviews_count = reviews.count()
+    product_gallery = ProductGallery.objects.filter(product_id = single_product.id)
 
     context = {
         'single_product': single_product, 
@@ -53,6 +54,7 @@ def product_detail(request, category_slug, product_slug):
         'orderproduct': orderproduct,
         'reviews': reviews,
         'reviews_count': reviews_count,
+        'product_gallery': product_gallery,
     }
     
     return render(request, 'store/product.html', context) 

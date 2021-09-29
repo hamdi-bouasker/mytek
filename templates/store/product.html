@@ -13,7 +13,7 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="{{ single_product.product_image.url }}" alt="{{ product.alt_text }}">
+								<img id="main" src="{{ single_product.product_image.url }}" alt="{{ product.alt_text }}">
 							</div>
 						</div>
 					</div>
@@ -22,9 +22,17 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
+						{% for img in product_gallery %}
 							<div class="product-preview">
-								<img src="{{ single_product.product_image.url }}" alt="{{ product.alt_text }}">
+								<img src="{{ img.image.url }}" alt="{{ product.alt_text }}" onclick="change(this.src)">
+								<script type="text/javascript">
+								const change = src => {
+									document.getElementById('main').src = src
+								}
+								
+								</script>
 							</div>
+						{% endfor %}
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->

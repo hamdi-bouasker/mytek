@@ -23,10 +23,8 @@ def register(request):
             l_name = form.cleaned_data['l_name']
             email = form.cleaned_data['email']
             tel = form.cleaned_data['tel']
-            #username = form.cleaned_data['email'].split('@')
             password = form.cleaned_data['password']
             user = Account.objects.create_user(f_name=f_name, l_name=l_name, email=email, tel=tel, password=password)
-            #user.is_active = False
             user.save()
 
             current_site = get_current_site(request)

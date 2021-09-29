@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b9388ca11be0d2d5b8250c6ff6331f8d76661f0d2a06f64c55c87f54708d7daf"
+            "sha256": "201ef5f87843c24cb1118e33edc34d0ed3ca50b9f8e40fc5e151f2516edcdaf3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -46,6 +46,29 @@
             ],
             "index": "pypi",
             "version": "==3.2.7"
+        },
+        "django-admin-honeypot": {
+            "hashes": [
+                "sha256:88e72753f5cbda88d909292d9f3fe7741fb74a8afad083f96e86114238f9b364",
+                "sha256:e18a52832b82740917737873c6f34117d15631565e9e4b7dbb9df48a29250796"
+            ],
+            "index": "pypi",
+            "version": "==1.1.0"
+        },
+        "django-admin-thumbnails": {
+            "hashes": [
+                "sha256:34aba117aef64c05d1a00193e4431f4033d8ec662a1b696c6e23e4168327def4"
+            ],
+            "index": "pypi",
+            "version": "==0.2.6"
+        },
+        "django-session-timeout": {
+            "hashes": [
+                "sha256:648fe4ffa762f3bb62ce7a9ed1bbba8e37648158d555f18a880471982941084c",
+                "sha256:e01b2502d4b9995edb93be1a66f304d0314cecb4f671ddc26cb4525a07e56282"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
         },
         "idna": {
             "hashes": [
@@ -114,6 +137,14 @@
             "index": "pypi",
             "version": "==8.3.2"
         },
+        "python-decouple": {
+            "hashes": [
+                "sha256:2e5adb0263a4f963b58d7407c4760a2465d464ee212d733e2a2c179e54c08d8f",
+                "sha256:a8268466e6389a639a20deab9d880faee186eb1eb6a05e54375bdf158d691981"
+            ],
+            "index": "pypi",
+            "version": "==3.4"
+        },
         "pytz": {
             "hashes": [
                 "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da",
@@ -128,6 +159,14 @@
             ],
             "index": "pypi",
             "version": "==2.26.0"
+        },
+        "six": {
+            "hashes": [
+                "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
+                "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==1.16.0"
         },
         "sqlparse": {
             "hashes": [

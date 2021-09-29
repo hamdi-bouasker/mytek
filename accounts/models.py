@@ -3,18 +3,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, f_name, l_name, email, tel, password=None):
+    def create_user(self, f_name, l_name, email, password=None):
         if not email:
             raise ValueError('Please provide valid email address.')
-
-        # if not username:
-        #     raise ValueError('Please provide valid username.')
 
         user = self.model(
             email = self.normalize_email(email),
             f_name = f_name,
             l_name = l_name,
-            tel=tel
         )
 
         user.set_password(password)
@@ -79,12 +75,4 @@ class Profile(models.Model):
 
     def fulllocation(self):
         return f"{self.city}, {self.state}, {self.country}"
-
-
-# @receiver(post_save, sender=UserProfile)
-# def update_profile_signal(sender, instance, created, **kwargs):
-#     if created:
-#         UserProfile.objects.create(user=instance)
-#     instance.profile.save()
-
 

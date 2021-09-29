@@ -7,6 +7,10 @@ name = "pypi"
 django = "*"
 pillow = "*"
 requests = "*"
+django-admin-thumbnails = "*"
+python-decouple = "*"
+django-admin-honeypot = "*"
+django-session-timeout = "*"
 
 [dev-packages]
 
