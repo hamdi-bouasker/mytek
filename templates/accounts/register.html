@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+		
+<!-- container -->
+<div class="container center" style="justify-content:center; padding-left:25%;">
+    <div class="card mx-auto" style="width:70%; margin-top:40px;">
+      <article class="card-body">
+	  {% include 'includes/alerts.html' %}
+		<header class="mb-4" style="text-align:center;"><h4 class="card-title">Sign up</h4></header>
+		<form action="{% url 'register' %}" method='POST'>
+		{% csrf_token %}
+				<div class="form-row">
+					<div class="col form-group">
+						<label>First name</label>
+					  	{{ form.f_name }}
+					</div> <!-- form-group end.// -->
+					<div class="col form-group">
+						<label>Last name</label>
+					  	{{ form.l_name }}
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row end.// -->
+				<div class="form-group">
+					<label>Email</label>
+					{{ form.email }}
+					<small class="form-text text-muted">We'll never share your email with anyone else.</small>
+				</div> <!-- form-group end.// -->
+
+				<div class="form-group">
+					<label>Phone</label>
+					{{ form.tel }}
+				</div> <!-- form-group end.// -->
+				
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Create password</label>
+					    {{ form.password }}
+					</div> <!-- form-group end.// --> 
+					<div class="form-group col-md-6">
+						<label>Repeat password</label>
+					    {{ form.confirm_password }}
+					</div> <!-- form-group end.// -->  
+				</div>
+			    <div class="form-group">
+			        <button type="submit" class="btn btn-primary btn-block" style="background-color:black; color:red; border-color: #D10024;"> Register  </button>			       
+				</div> <!-- form-group// -->  
+				    {{ form.email.errors }}
+				    {{ form.non_field_errors }}
+			       </div> <!-- form-row.// -->    
+			</form>
+		</article><!-- card-body.// -->		
+	</div> <!-- card .// -->  
+	<div>
+    <p style="text-align:center;">Have an account? <a href="{% url 'login' %}">Log In</a></p>
+    </div>     
+</div>
+<!-- /container -->
+		
+   
+{% endblock content %}

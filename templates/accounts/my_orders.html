@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- container -->
+<div class="container center" style="margin-top:2em;">
+<section class="section-conten padding-y bg">
+{% include 'includes/alerts.html' %}
+<div class="container">
+	<div class="row">
+	 {% include 'includes/dashboard_sidebar.html' %}
+	 <main class="col-md-9">
+	 <article class="card">
+	 <header class="card-header">
+	 <h5 style="text-align:center;"><strong class="d-inline-block mr-3">Your orders history</strong></h5><br>
+	 </header>
+	<div class="card-body">
+    <div class="row">
+	<div class="col-md-12">
+	<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Order #</th>
+      <th scope="col">Billing name</th>
+      <th scope="col">Tel</th>
+       <th scope="col">Email</th>
+       <th scope="col">Billing address</th>
+      <th scope="col">Order total</th>
+	  <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for order in orders %}
+    <tr>
+      <th scope="row"> <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}}</a></th>
+      <td>{{order.full_name}}</td>
+      <td>{{order.tel}}</td>
+      <td>{{order.email}}</td>
+       <td>{{order.address}}</td>
+      <td>$ {{order.order_total}}</td>
+	   <td>{{order.created_at}}</td>
+    </tr>
+   {% endfor %}
+    
+  </tbody>
+</table>
+	</div>
+	</div>
+	</div>
+
+</article>		
+</main>
+</div>
+</div>
+</section>
+</div>
+
+
+{% endblock content %}

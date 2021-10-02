@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+			{% include 'includes/alerts.html' %}
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Billing address</h3>
+							</div>
+
+							<form action="{% url 'place_order' %}" method='POST'>
+							{% csrf_token %}
+
+							<div class="form-group">
+								<input class="input" type="text" name="f_name" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="l_name" placeholder="Last Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="tel" placeholder="Telephone">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" placeholder="Address">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="city" placeholder="City">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="state" placeholder="State">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="country" placeholder="Country">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="zipcode" placeholder="ZIP Code">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="order_note" placeholder="Order note">
+							</div>
+						</div>
+						<!-- /Billing Details -->
+					</div>
+                        <!-- col -->
+
+					<!-- Order Details -->
+					<div class="col-md-5 order-details">
+						<div class="section-title text-center">
+							<h3 class="title">Your Order</h3>
+						</div>
+						<div class="order-summary">
+							<div class="order-col">
+								<div><strong>PRODUCT</strong></div>
+								<div><strong>TOTAL</strong></div>
+							</div>
+							<div class="order-products">
+                                {% for item in cart_items %}
+								<div class="order-col">
+									<div>{{item.product.name}} <b>x {{item.quantity}}</b></div>
+									<div>${{item.subtotal}}</div>	
+								</div>
+								{% endfor %}
+							</div>
+
+							<div class="order-col">
+								<div>Shiping</div>
+								<div><strong>${{shipping_price}}</strong></div>
+							</div>
+
+							<div class="order-col">
+								<div>Tax 2%</div>
+								<div><strong>${{tax}}</strong></div>
+							</div>
+
+							<div class="order-col">
+								<div><strong>GRAND TOTAL</strong></div>
+								<div><strong class="order-total">${{grand_total}}</strong></div>
+							</div>
+						</div>
+
+						<div class="input-checkbox">
+							<input checked type="checkbox" id="terms" name="terms">
+							
+							<label for="terms">
+								<span></span>
+								I've read and accept the <a href="#">terms & conditions</a>
+							</label>
+						</div>
+						<button type="submit" class="primary-btn order-submit btn-block" style="background-color:black;color:#ff0000;">Place order</button>
+						</form>
+						<a href="{% url 'store' %}" class="primary-btn order-submit" style="background-color:black;color:#ff0000;">Continue shopping</a>
+					</div>
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+{% endblock content %}
+
+		

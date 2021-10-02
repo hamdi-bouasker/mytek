@@ -1,0 +1,198 @@
+
+
+/* ========================
+INCLUDE STYLES AND COMPONENTS
+===================== */
+/* ================== HELPERS  =================== */
+a:hover {
+  text-decoration: none;
+}
+
+.img-wrap {
+  text-align: center;
+  display: block;
+}
+.img-wrap img {
+  max-width: 100%;
+}
+
+.price-wrap {
+  letter-spacing: -0.7px;
+}
+
+/* =================  DEFINED VARIABLES =================== */
+
+.img-xs, .img-sm, .img-md, .img-lg {
+  -o-object-fit: cover;
+     object-fit: cover;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.img-xs {
+  width: 40px;
+  height: 40px;
+}
+
+.img-sm {
+  width: 80px;
+  height: 80px;
+}
+
+
+.img-md {
+  width: 140px;
+  height: 140px;
+}
+
+.img-lg {
+  width: 250px;
+  height: 250px;
+}
+
+figure {
+  margin-bottom: 0;
+}
+
+.form-noborder input, .form-noborder select, .form-noborder .btn {
+  border: 0;
+}
+.form-noborder select.form-control-lg:not([size]):not([multiple]) {
+  height: 2.875rem;
+}
+
+.btn-icon {
+  width: calc(1.5em + 0.9rem + 2px);
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+.btn-icon i {
+  line-height: 1;
+}
+
+.btn-light {
+  background-color: #fff;
+  border-color: #e4e4e4;
+}
+.btn-light i {
+  color: #969696;
+}
+.btn-light:hover {
+  background-color: #fff;
+  border-color: #989898;
+}
+
+.btn .text + i {
+  margin-left: 10px;
+}
+.btn i + .text {
+  margin-left: 10px;
+}
+
+.itemside {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+.itemside .aside {
+  position: relative;
+  flex-shrink: 0;
+}
+.itemside .info {
+  padding-left: 15px;
+  padding-right: 7px;
+}
+.itemside p {
+  margin-bottom: 0;
+}
+.itemside .title {
+  display: block;
+  margin-bottom: 5px;
+  color: #212529;
+}
+.itemside a.title:hover {
+  color: #3167eb;
+}
+
+a.itemside {
+  color: initial;
+}
+
+/* --------- description list --------*/
+dl[class=row] {
+  margin-bottom: 0;
+}
+[class*=dlist-] {
+  margin-bottom: 5px;
+}
+[class*=dlist-] dd {
+  margin-bottom: 0;
+}
+
+.dlist-inline dt, .dlist-inline dd {
+  display: inline-block;
+}
+
+.dlist-align {
+  display: flex;
+}
+.dlist-align dt {
+  width: 150px;
+  word-wrap: break-word;
+  font-weight: normal;
+}
+.dlist-align dd {
+  flex-grow: 1;
+}
+
+.card-body {
+  background-size: cover;
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  overflow: hidden;
+}
+
+.input-spinner {
+  width: 125px;
+  flex-wrap: nowrap;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.input-spinner input.form-control {
+  text-align: center;
+  max-width: 46px;
+  font-weight: bold;
+  flex-basis: 46px;
+  border-color: #e4e4e4;
+  flex-grow: 0;
+}
+.input-spinner .btn {
+  width: 42px;
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+/* ====================== shopping-cart ==================== */
+.table-shopping-cart.table td, .table-shopping-cart.table th {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.table-shopping-cart .price-wrap {
+  line-height: 1.2;
+}
+.table-shopping-cart .price {
+  font-weight: bold;
+  margin-right: 5px;
+  display: block;
+}
+
+#signup-section {
+  width: 600px; 
+  margin: auto;
+}
+
+/*# sourceMappingURL=ui.css.map */

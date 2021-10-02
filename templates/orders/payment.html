@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+<div class="row">
+	<aside class="col-lg-8">
+<div class="card" style="margin-top:2em;">
+  <div class="card-header">
+    <b>Billing address</b>
+  </div>
+  <br>
+  <div class="card-body">
+   <p class="card-text mb-0"><strong>Full name:</strong> {{order.full_name}}</p>
+    <p class="card-text mb-0"><strong>Address:</strong> {{order.address}}</p>
+    <p class="card-text mb-0"><strong>Country, State, City:</strong> {{order.thecountry}}</p>
+    <p class="card-text mb-0"><strong>Tel:</strong> {{order.tel}}</p>
+    <p class="card-text mb-0"><strong>Email:</strong> {{order.email}}</p>
+    {% if order.order_note %}
+    <p class="card-text mb-0"><strong>Order Note:</strong> {{order.order_note}}</p>
+    {% endif %}
+  </div>
+</div>
+ <hr>
+  <br>
+
+<div class="card" style="margin-top:2em;">
+  <div class="card-header">
+     <b>Payment Method</b>
+  </div>
+  <br>
+  <div class="card-body">
+     <p class="card-text">Paypal</p>
+  </div>
+</div>
+<hr>
+  <br>
+
+<div class="card" style="margin-top:2em;">
+  <div class="card-header">
+    <b>Review</b>
+  </div>
+  <br>
+  <div class="card-body">
+    <div class="col-md-8 order-details">
+    {% for item in cart_items %}
+        <div class="order-products">
+            <div class="order-col">					   
+                <div><strong>Product:</strong> {{item.product.name}} <b>x {{item.quantity}}</b></div>
+                <div><strong>Sub-total:</strong> ${{item.subtotal}}</div>									
+            </div>
+            <br>
+        {% endfor %}
+        <hr>
+        <div class="order-col">
+            <div><strong>Shipping fee:</strong> ${{shipping_price}}</div>
+        </div>
+        <br>
+        <hr>
+        <div class="order-col">
+            <div><strong>Tax:</strong> ${{tax}}</div>
+        </div>
+        <br>
+        <hr>
+        <div class="order-col">
+            <div><strong class="order-total">Grand total:</strong> ${{grand_total}}</div>
+        </div>
+    </div>
+  </div>
+</div>
+</aside> <!-- col.// -->
+
+	<aside class="col-lg-4">
+		<div class="card">
+		<div class="card-body">
+			<dl class="dlist-align">
+			  <dt>Tax:</dt>
+			  <dd class="text-right"> ${{ tax }}</dd>
+			</dl>
+			<dl class="dlist-align">
+			  <dt>Grand Total:</dt>
+			  <dd class="text-right text-dark b"><strong>${{ grand_total }}</strong></dd>
+			</dl>
+			<hr>
+			<p class="text-center mb-3">
+				<img src="{% static 'img/payments.png' %}" height="26">
+			</p>
+			<div id="paypal-button-container"></div>
+			<a href="{% url 'store' %}" style="background-color:black;color:#ff0000;" class="btn btn-light btn-block">Continue Shopping</a>
+		</div> <!-- card-body.// -->
+		</div> <!-- card.// -->
+</aside> <!-- col.// -->
+</div>
+</div> <!-- row.// -->
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<script>
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+
+          var amount = "{{ grand_total }}"
+          var url = "{% url 'payment' %}"
+          var csrftoken = getCookie('csrftoken');
+          var orderID = "{{ order.order_number }}"
+          var payment_method = 'PayPal'
+          var redirect_url = "{% url 'order_completed' %}"
+          // Render the PayPal button into #paypal-button-container
+          paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function (data, actions) {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    value: amount,
+                  }
+                }]
+              });
+            },
+
+            // Finalize the transaction
+            onApprove: function (data, actions) {
+              return actions.order.capture().then(function (orderData) {
+                console.log(orderData);
+                sendData();
+                function sendData() {
+                  fetch(url, {
+                    method: "POST",
+                    headers: {
+                      "Content-type": "application/json",
+                      "X-CSRFToken": csrftoken,
+                    },
+                    body: JSON.stringify({
+                      orderID: orderID,
+                      transactionID: orderData.id,
+                      payment_method: payment_method,
+                      status: orderData.status,
+                    }),
+
+                  })
+                    .then((response) => response.json())
+                    .then((data) => {
+                     window.location.href = redirect_url+'?order_number='+data.order_number+'&payment_id='+data.transactionID;
+                    });                 
+                }
+
+              });
+            }
+          }).render('#paypal-button-container');
+    </script>
+
+{% endblock content %}

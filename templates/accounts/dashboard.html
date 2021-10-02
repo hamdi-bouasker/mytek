@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- container -->
+<div class="container center" style="margin-top:2em;">
+<section class="section-conten padding-y bg">
+{% include 'includes/alerts.html' %}
+<div class="container">
+	<div class="row">
+	 {% include 'includes/dashboard_sidebar.html' %}
+	 <main class="col-md-9">
+	 <article class="card">
+	 <header class="card-header">
+	 <h5 style="text-align:center;"><strong class="d-inline-block mr-3">Dashboard</strong></h5><br>
+	 </header>
+	<div class="card-body">
+    <div class="row">
+	<div class="col-md-12">
+	</div>
+	</div>
+	</div>
+
+</article>		
+</main>
+</div>
+</div>
+</section>
+</div>
+
+
+{% endblock content %}

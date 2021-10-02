@@ -1,0 +1,62 @@
+.mobile-block {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  /* tablet devices */
+}
+@media (max-width: 992px) {
+  /* small tablet devices */
+
+
+  .table-shopping-cart tr td:first-child {
+    width: 250px;
+  }
+  .table-shopping-cart .itemside .info {
+    padding: 0;
+  }
+  .table-shopping-cart .itemside .aside {
+    display: none;
+  }
+}
+@media all and (max-width: 768px) {
+  /* mobile devices */
+  .mobile-block {
+    display: block;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  .mobile-order-first {
+    order: -1;
+  }
+
+  .mobile-order-1 {
+    order: 1;
+  }
+
+  .mobile-order-2 {
+    order: 2;
+  }
+
+  .mobile-order-3 {
+    order: 3;
+  }
+
+  .mobile-py {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .mobile-pb {
+    padding-bottom: 20px;
+  }
+
+  .mobile-pt {
+    padding-top: 20px;
+  }
+}
+
+/*# sourceMappingURL=responsive.css.map */

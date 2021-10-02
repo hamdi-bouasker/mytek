@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Hi {{ user.f_name }},
+
+Please click on the link below to activate your account.
+
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+If you think you are receiving this email by mistake, please ignore it.
+
+Thank you
+
+
+MyTech® - Your Technology
+
+
+{% endautoescape %}
