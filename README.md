@@ -1,6 +1,6 @@
 # MyTech® - Your Technology --- Django Ecommerce App with Advanced Features
 
-![mytech.gif](https://github.com/IT-Support-L2/mytek/blob/master/mytech.gif)
+![mytech.gif](https://github.com/IT-Support-L2/mytek/blob/main/mytech.gif)
 
 ### Images and Prices are only used for Demo purpose and does not reflect real products! 
 
