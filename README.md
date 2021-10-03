@@ -32,6 +32,9 @@ Password: `mytek2021`
 ### Local DB
 - sqlite3
 
+### Live Demo DB
+- PostgreSQL DB
+
 
 ## Project current functionalities
 
