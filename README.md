@@ -65,7 +65,7 @@ Password: `mytek2021`
 
 - Query using `keywords`
 
-### Paggination
+### Pagination
 
 - Products pagination
 
