@@ -88,7 +88,7 @@ def login(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-@login_required(login_url='/login/')
+@login_required
 def logout(request):
     auth.logout(request)
     messages.success(request, 'Your are logged out.')
