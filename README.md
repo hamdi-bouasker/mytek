@@ -1,6 +1,6 @@
 # MyTech® - Your Technology
 
-### Django E-commerce App with Advanced Features and friendly SEO
+### Django e-commerce website with Advanced Features and SEO Friendly
 
 ![mytech.gif](https://github.com/IT-Support-L2/mytek/blob/main/mytech.gif)
 
