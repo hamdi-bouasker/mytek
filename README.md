@@ -21,6 +21,7 @@ Password: `mytek2021`
 - `HTML`, `CSS`, `Bootstrap`, `JavaScript`, `jQuery`
 
 - Templates downloaded for free from https://www.templateshub.net/template/Electro-eCommerce-Website-Templates 
+
   I modified few parts to meet the required specifications. Else, backend is coded and integrated from the scratch.
   
 - Templates I coded: cart.html, checkout.html, accounts templates, order templates
