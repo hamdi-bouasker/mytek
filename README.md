@@ -97,6 +97,7 @@ Password: `mytek2021`
 
 ### Project Next Functionalities
 
+- API
 - MFA
 - CACHE
 - Sub-Categories
@@ -107,11 +108,4 @@ Password: `mytek2021`
 - Automated email alert once the stock reached 10 pieces as exemple
 - The most feature I am very interested to implement, is: Automated live analytics with automated daily report sent to admin or store owner email address. 
 
-
-
-
-
-
-
-
-
+### Support this project through Sponsor button to make this project N1 Ecommerce Django model so that all Django students will have top notch Ecommerce project model to follow and learn from.
