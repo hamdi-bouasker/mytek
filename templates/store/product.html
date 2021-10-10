@@ -1,3 +1,266 @@
+<<<<<<< HEAD
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Product main img -->
+					<div class="col-md-5 col-md-push-2">
+						<div id="product-main-img">
+							<div class="product-preview">
+								<img id="main" src="{{ single_product.product_image.url }}" alt="{{ product.alt_text }}">
+							</div>
+						</div>
+					</div>
+					<!-- /Product main img -->
+
+					<!-- Product thumb imgs -->
+					<div class="col-md-2  col-md-pull-5">
+						<div id="product-imgs">
+						{% for img in product_gallery %}
+							<div class="product-preview">
+								<img src="{{ img.image.url }}" alt="{{ product.alt_text }}" onclick="change(this.src)">
+								<script type="text/javascript">
+								const change = src => {
+									document.getElementById('main').src = src
+								}
+								
+								</script>
+							</div>
+						{% endfor %}
+						</div>
+					</div>
+					<!-- /Product thumb imgs -->
+
+					<!-- Product details -->
+					<div class="col-md-5">
+						<div class="product-details">
+							<h2 class="product-name">{{ single_product.name }}</h2>
+							<div>
+							   <span>Average rating</span>
+								<div class="product-rating">
+									{% if theproduct.average_rating == 1 %}
+									<i class="fa fa-star"></i>
+									{% elif single_product.average_rating == 2 %}
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									{% elif single_product.average_rating == 3 %}
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									{% elif single_product.average_rating == 4 %}
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									{% elif single_product.average_rating == 5 %}
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									{% elif single_product.average_rating == 0 %}
+									<i class="fa fa-star-o empty"></i>
+									{% endif %}
+								</div>
+								
+								<a class="review-link" href="#review_product">{{reviews_count}} Review(s) | Add your review</a>
+							</div>
+							<div>
+								<h3 class="product-price">{% if single_product.discount_price %} ${{ single_product.discount_price }} <del class="product-old-price">${{ single_product.price }}</del></h3>{% else %}<h3>${{ single_product.price }}</h3>{% endif %}
+								<span class="product-available">Stock: {{ single_product.stock }}</span>
+							</div>
+							<p>{{ single_product.description }}</p>
+                            {% if single_product.stock < 1 %}							
+								<h6 style="color:red">out of stock</h6>								
+								{% elif in_cart %}
+								<a href="#" style="margin-bottom:1em;" class="btn btn-success">added to cart <i class="fa fa-check"></i></a>
+								<a href="{% url 'cart' %}" style="margin-bottom:1em;" class="btn btn-primary">View cart <i class="fa fa-eye"></i></a>
+								{% else %}
+							<div class="add-to-cart">						
+								<a href="{% url 'add_cart' single_product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</a>		    
+							</div>
+                            {% endif %}
+							<ul class="product-links">
+								<li>Category:</li>
+								<li><a href="#">{{ single_product.category }}</a></li>								
+							</ul>
+							<ul class="product-links">
+								<li>Share:</li>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+
+						</div>
+					</div>
+					<!-- /Product details -->
+
+					<!-- Product tab -->
+					<div class="col-md-12">
+						<div id="product-tab">
+							<!-- product tab nav -->
+							<ul class="tab-nav" id="review_product">
+								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></l>
+								<li><a data-toggle="tab" href="#tab3">Reviews {{reviews_count}}</a></li>
+							</ul>
+							<!-- /product tab nav -->
+
+							<!-- product tab content -->
+							<div class="tab-content">
+								<!-- tab1  -->
+								<div id="tab1" class="tab-pane fade in active">
+									<div class="row">
+										<div class="col-md-12">
+											<p>{{ single_product.description }}</p>
+										</div>
+									</div>
+								</div>
+								<!-- /tab1  -->
+
+								<!-- tab3  -->
+								<div id="tab3" class="tab-pane fade in">
+									<div class="row">
+										<!-- Rating -->
+										<div class="col-md-3">
+											<div id="rating">
+												<div class="rating-avg">
+												    <h4>Average rating</h4>
+													<span>{{single_product.average_rating}}</span>
+													<div class="rating-stars">
+														{% if single_product.average_rating == 1 %}
+														<i class="fa fa-star"></i>
+														{% elif single_product.average_rating == 2 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif single_product.average_rating == 3 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif single_product.average_rating == 4 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif single_product.average_rating == 5 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif single_product.average_rating == 0 %}
+														<i class="fa fa-star-o empty"></i>
+														{% endif %}
+													</div>												
+												</div>											
+											</div>
+										</div>
+										<!-- /Rating -->
+
+										<!-- Reviews -->
+										{% for review in reviews %}
+										<div class="col-md-6">
+											<div id="reviews">
+												<ul class="reviews">
+													<li>
+														<div class="review-heading">
+															<h5 class="name">{{review.user.fullname}}</h5>
+															<p class="date">{{review.updated_at}}</p>
+															<div class="review-rating">
+															    {% if review.rating == 1 %}
+																<i class="fa fa-star"></i>
+																{% elif review.rating == 2 %}
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																{% elif review.rating == 3 %}
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																{% elif review.rating == 4 %}
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																{% elif review.rating == 5 %}
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																{% elif review.rating == 0 %}
+																<i class="fa fa-star-o empty"></i>
+																{% endif %}
+															</div>
+														</div>
+														<div class="review-body">
+														    <h6>{{review.subject}}</h6>
+															<p>{{review.review}}</p>
+														</div>
+													</li>
+													<li>														
+											</div>
+										</div>
+										{% endfor %}
+										<!-- /Reviews -->
+
+										<!-- Review Form -->
+										<div class="col-md-3">
+											<div id="review-form">
+											    {% include 'includes/alerts.html' %}											     
+												<form class="review-form" action="{% url 'submit_review' single_product.id %}" method="POST">
+												 {% csrf_token %}
+													{% comment %} <input class="input" type="text" placeholder="Your Name">
+													<input class="input" type="email" placeholder="Your Email"> {% endcomment %}
+													<input class="input" type="text" placeholder="Title" name="subject">
+													<textarea class="input" placeholder="Your Review" name="review"></textarea>
+													<div class="input-rating">
+														<span>Your Rating: </span>
+														<div class="stars">
+															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+														</div>
+													</div>
+													{% if request.user.is_authenticated %}
+													{% if orderproduct %}
+													<button class="primary-btn">Submit</button>
+													{% else %}
+													<p>You must purchase the product to submit a review.</p>
+													{% endif %}
+													{% else %}
+													<p>You must be logged in to submit a review</p>
+													{% endif %}
+												</form>
+											</div>
+										</div>																														
+										<!-- /Review Form -->
+									</div>
+								</div>
+								<!-- /tab3  -->
+							</div>
+							<!-- /product tab content  -->
+						</div>
+					</div>
+					<!-- /product tab -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+{% endblock content %}	
+||||||| empty tree
+=======
 
 {% extends 'base.html' %}
 {% load static %}
@@ -262,3 +525,4 @@
 		<!-- /SECTION -->
 
 {% endblock content %}	
+>>>>>>> b51fca373ef4c1955ba4b56ca69a5ca1fb93be60

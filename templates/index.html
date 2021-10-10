@@ -1,3 +1,156 @@
+<<<<<<< HEAD
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+					
+							<h3 style="text-align:center; text-transform: uppercase;">Trending Now</h3>
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										<!-- product -->
+										{% for product in products %}
+										<div class="product">
+										
+											<div class="product-img">
+												<img src="{{ product.product_image.url }}" alt="{{ product.alt_text }}">
+												{% if product.discount_price > 0 %}
+												<div class="product-label">
+													<span class="sale">{{ product.discount_percentage }}%</span>
+													<span class="new">DISCOUNT</span>
+												</div>
+												{% endif %}
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{ product.category }}</p> 
+												<h3 class="product-name">{{ product.name | truncatewords:"10" }}</h3>
+												<h4 class="product-price">{% if product.discount_price %} ${{ product.discount_price }} <del class="product-old-price">${{ product.price }}</del></h4>{% else %}<h4>${{ product.price }}</h4>{% endif %}
+												 
+												<div class="product-rating">
+												   
+													{% if single_product.average_rating == 1 %}
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 2 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 3 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 4 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 5 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 0 %}
+														<i class="fa fa-star-o empty"></i>
+														{% endif %}
+												</div>	
+												<div class="product-btns">
+													<button class="quick-view"><a href="{{ product.get_url}}"><i class="fa fa-eye"></i></a><span class="tooltipp">quick view</span></button>
+												</div>										
+											</div>
+											{% if product.stock < 1 %}
+											<div class="add-to-cart">
+												<h6 style="color:red">out of stock</h6>
+											</div>
+											{% else %}
+											<div class="add-to-cart">
+												<a href="{% url 'add_cart' product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</a>
+											</div>
+											{% endif %}
+										</div>
+										<!-- /product --> 
+					                   {% endfor %} 
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+					
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<ul class="hot-deal-countdown">
+								<li>
+									<div>
+										<h3>02</h3>
+										<span>Days</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>10</h3>
+										<span>Hours</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>34</h3>
+										<span>Mins</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>60</h3>
+										<span>Secs</span>
+									</div>
+								</li>
+							</ul>
+							<h2 class="text-uppercase">hot deal this week</h2>
+							<p>New Collection Up to 50% OFF</p>
+							<a class="primary-btn cta-btn" href="#">Shop now</a>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /HOT DEAL SECTION -->
+
+{% endblock content %}
+||||||| empty tree
+=======
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -149,3 +302,4 @@
 		<!-- /HOT DEAL SECTION -->
 
 {% endblock content %}
+>>>>>>> b51fca373ef4c1955ba4b56ca69a5ca1fb93be60
