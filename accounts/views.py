@@ -1,7 +1,14 @@
 
-from .models import Account, Profile
+
+
+from django.shortcuts import render, redirect
+from django.views.decorators.cache import cache_page
 from.forms import RegistrationForm, UserForm, UserProfileForm 
-from django.shortcuts import get_object_or_404, render, redirect
+from .models import Account, Profile
+from django.contrib import messages, auth
+from cart.models import Cart, CartItem
+from cart.views import _cart_id
+from orders.models import Order, OrderProduct
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
@@ -9,10 +16,6 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib import messages, auth
-from cart.models import Cart, CartItem
-from cart.views import _cart_id
-from orders.models import Order, OrderProduct
 
 
 def register(request):
@@ -43,6 +46,7 @@ def register(request):
 
         else:
             form = RegistrationForm()
+            messages.error(request, 'Password did not match or email address already exist!')
             return render(request, 'accounts/register.html', {'form':form})
     else:
         form = RegistrationForm()
@@ -81,18 +85,22 @@ def login(request):
                         item.save()
             except:
                 pass
+
             auth.login(request, user)
             return redirect('dashboard')
+
         else:
             messages.error(request, 'Invalid credentials!')
-            return redirect('login')
-    return render(request, 'accounts/login.html')
+            return render(request, 'accounts/login.html')
+    else:
+        messages.error(request, 'Something wrong! Please try again.')        
+        return render(request, 'accounts/login.html')
 
-@login_required(login_url='/login/')
+@login_required
 def logout(request):
     auth.logout(request)
     messages.success(request, 'Your are logged out.')
-    return redirect('login')
+    return render(request, 'index.html')
 
 def forgot_password(request):
     if request.method == 'POST':
@@ -114,7 +122,7 @@ def forgot_password(request):
             return redirect('login')
         else:
             messages.error(request, 'Invalid email address!')
-            return redirect('forgot_password')
+            return render(request, 'accounts/forgot_password.html')
     else:
         return render(request, 'accounts/forgot_password.html')
 
@@ -147,19 +155,16 @@ def reset_password(request):
             return redirect('login')
         else:
             messages.error(request, 'Passwords did not match!')
-            return redirect('reset_password')
+            return render(request, 'accounts/reset_password.html')
     else:
         return render(request, 'accounts/reset_password.html')
 
+@cache_page(60 * 15)
 @login_required
 def dashboard(request):
-    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
-    orders_count = orders.count()
-    context = {
-        'orders_count': orders_count,
-    }
-    return render(request, 'accounts/dashboard.html', context)
+    return render(request, 'accounts/dashboard.html')
 
+@cache_page(60 * 15)
 @login_required
 def my_orders(request):
     orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
@@ -167,7 +172,7 @@ def my_orders(request):
 
 @login_required
 def edit_profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':   
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = UserProfileForm(request.POST, instance=profile)
@@ -176,16 +181,30 @@ def edit_profile(request):
             profile_form.save()
             messages.success(request, 'Your profile is successfully updated.')
             return redirect('edit_profile')
+
+        else:
+            messages.error(request, 'Invalid entries! Please try again.')
+            user_form = UserForm(instance=request.user)
+            profile_form = UserProfileForm(instance=profile)
+
+            context = {
+                'user_form': user_form,
+                'profile_form': profile_form,
+            }
+
+            return render(request, 'accounts/edit_profile.html', context)
+
     else:
+    
         user_form = UserForm(instance=request.user)
         profile_form = UserProfileForm(instance=profile)
 
-    context = {
-        'user_form': user_form,
-        'profile_form': profile_form,
-    }
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form,
+        }
 
-    return render(request, 'accounts/edit_profile.html', context)
+        return render(request, 'accounts/edit_profile.html', context)
 
 @login_required
 def change_password(request):
@@ -209,9 +228,10 @@ def change_password(request):
         else:
             messages.error(request, 'Passwords did not match! Please try again.')
             return render(request, 'accounts/change_password.html')
+    else:
+        return render(request, 'accounts/change_password.html')
 
-    return render(request, 'accounts/change_password.html')
-
+@cache_page(60 * 15)
 @login_required
 def order_detail(request, order_id):
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
@@ -225,16 +245,3 @@ def order_detail(request, order_id):
         'subtotal': subtotal,
     }
     return render(request, 'accounts/order_detail.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-

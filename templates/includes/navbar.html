@@ -37,8 +37,8 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="{% static 'img/logo.svg' %}" alt="mytek-logo">
+								<a href="{% url 'index' %}" class="logo">
+									<h5 style="color: red; margin-top: 2em;" onMouseOver="this.style.color='white'" onMouseOut="this.style.color='red'"><i class="fa fa-signal" aria-hidden="true"></i>   MyTech® - Your Technology</h5>
 								</a>
 							</div>
 						</div>
@@ -65,19 +65,15 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">0</div>
+							    <div>
+									<a href="https://github.com/IT-Support-L2/mytek" target="_blank">
+										<i class="fa fa-github"></i>
+										<span>Project repo</span>
 									</a>
 								</div>
-								<!-- /Wishlist -->
-
 								<!-- Cart -->
 								<div>
-									<a href={% url 'cart' %}>
+									<a href="{% url 'cart' %}">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
 										<div class="qty">{{ cart_count }}</div>

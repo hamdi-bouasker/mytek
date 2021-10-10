@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.decorators.cache import cache_page
 from store.models import Product
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
@@ -95,6 +96,7 @@ def remove_cart_item(request, product_id):
         cart_item.delete()
         return redirect('cart')
 
+@cache_page(60 * 15)
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
         tax = 0

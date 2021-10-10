@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from store.models import Product
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import cache_page
 from cart.models import CartItem
 from .forms import OrderForm
 from .models import Order, OrderProduct, Payment
@@ -129,6 +130,7 @@ def payment(request):
 
     return JsonResponse(data)
 
+@cache_page(60 * 15)
 def order_completed(request):
     order_number = request.GET.get('order_number')
     transactionID = request.GET.get('payment_id')

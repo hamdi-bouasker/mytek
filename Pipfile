@@ -11,6 +11,8 @@ django-admin-thumbnails = "*"
 python-decouple = "*"
 django-admin-honeypot = "*"
 django-session-timeout = "*"
+djangorestframework = "*"
+django-filter = "*"
 
 [dev-packages]
 

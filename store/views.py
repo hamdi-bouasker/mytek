@@ -1,6 +1,7 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.cache import cache_page
 from orders.models import OrderProduct
 from .forms import ReviewForm
-from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, ProductGallery, ReviewRating
 from category.models import Category
 from cart.models import Cart, CartItem
@@ -12,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
+
+@cache_page(60 * 15)
 def store(request, category_slug=None):
     categories = None
     if category_slug != None:
@@ -32,6 +35,7 @@ def store(request, category_slug=None):
         product_count = products.count()
     return render(request, 'store/store.html', {'products':paged_products, 'product_count': product_count, 'topSelling_products':topSelling_products})  
 
+@cache_page(60 * 15)
 def product_detail(request, category_slug, product_slug):
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
@@ -66,7 +70,7 @@ def search(request):
             products = Product.objects.order_by('-created_at').filter(Q(description__icontains=keyword) | Q(name__icontains=keyword))
     return render(request, 'store/store.html', {'products':products})
 
-@login_required(login_url='login')
+@login_required
 def checkout(request, total=0, quantity=0, cart_items=None):
     try:
         tax = 0
