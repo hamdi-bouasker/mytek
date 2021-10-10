@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
@@ -18,3 +19,24 @@ django-filter = "*"
 
 [requires]
 python_version = "3.9"
+||||||| empty tree
+=======
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+pillow = "*"
+requests = "*"
+django-admin-thumbnails = "*"
+python-decouple = "*"
+django-admin-honeypot = "*"
+django-session-timeout = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+>>>>>>> b51fca373ef4c1955ba4b56ca69a5ca1fb93be60

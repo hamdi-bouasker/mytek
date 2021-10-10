@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -198,3 +199,210 @@
 
 
 {% endblock content %}
+||||||| empty tree
+=======
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Price</h3>
+							<div class="price-filter">
+								<div id="price-slider"></div>
+								<div class="input-number price-min">
+									<input id="price-min" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+								<span>-</span>
+								<div class="input-number price-max">
+									<input id="price-max" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Top selling</h3>
+							{% for product in topSelling_products %}
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="{{ product.product_image.url }}" alt="{{ product.alt_text }}">
+								</div>
+								<div class="product-body">
+									<p class="product-category">{{ product.category }}</p> 
+									<h3 class="product-name"><a href="{{ product.get_url}}">{{ product.name | truncatewords:"10" }}</a></h3>
+									<h4 class="product-price">{% if product.discount_price %} ${{ product.discount_price }} <del class="product-old-price">${{ product.price }}</del></h4>{% else %}<h4>${{ product.price }}</h4>{% endif %}
+								    {% if product.stock < 1 %}
+									<h6 style="color:red;">out of stock</h6>
+									{% endif %}
+								</div>
+							</div>
+							{% endfor %}					
+						</div>
+						<!-- /aside Widget -->
+					</div>
+					<!-- /ASIDE -->
+
+					<!-- STORE -->
+					<div id="store" class="col-md-9">
+						<!-- store top filter -->
+						<div class="store-filter clearfix">
+							<div class="store-sort">
+								<label>
+									Sort By:
+									<select class="input-select">
+										<option value="#">Trending</option>
+										<option value="#">Best Selling</option>
+									</select>
+								</label>
+
+								
+							</div>
+							<ul class="store-grid">
+								<li class="active"><i class="fa fa-th"></i></li>
+								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+							</ul>
+						</div>
+						<!-- /store top filter -->
+
+						<!-- store products -->
+						<div class="row">
+							<!-- product -->
+							{% if products %}															
+							{% for product in products %}
+							<div class="col-md-3">									
+								<div class="product">								
+									<div class="product-img">
+										<img src="{{ product.product_image.url }}" alt="{{ product.alt_text }}">
+										{% if product.discount_price > 0 %}
+												<div class="product-label">
+													<span class="sale">{{ product.discount_percentage }}%</span>
+													<span class="new">DISCOUNT</span>
+												</div>
+										{% endif %}
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{ product.category }}</p> 
+										<h3 class="product-name"><a href="{{ product.get_url}}">{{ product.name | truncatewords:"10" }}</a></h3>
+										<h4 class="product-price">{% if product.discount_price %} ${{ product.discount_price }} <del class="product-old-price">${{ product.price }}</del></h4>{% else %}<h4>${{ product.price }}</h4>{% endif %}
+										<div class="product-rating">
+											{% if single_product.average_rating == 1 %}
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 2 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 3 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 4 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 5 %}
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														{% elif product.average_rating == 0 %}
+														<i class="fa fa-star-o empty"></i>
+														{% endif %}
+										</div>
+										<div class="product-btns">
+											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+											<button class="quick-view"><a href="{{ product.get_url}}"><i class="fa fa-eye"></i></a><span class="tooltipp">quick view</span></button>
+										</div>
+									</div>
+									{% if product.stock < 1 %}
+											<div class="add-to-cart">
+												<h6 style="color:red">out of stock</h6>
+											</div>
+											{% else %}
+									<div class="add-to-cart">
+										<a href="{% url 'add_cart' product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+									</div>
+									{% endif %}																
+							    </div>
+							</div>
+							<!-- /product -->
+							{% endfor %}
+							{% else %}
+							<div>
+							<h4>No items found.</h4>
+							</div>
+							{% endif %}
+						</div>
+						<!-- /store products -->
+                            
+						<!-- store bottom filter -->
+						<div class="store-filter clearfix">
+
+						{% if products.has_other_pages %}
+
+							<ul class="store-pagination">
+
+							    {% if products.has_previous %}
+
+							    <li><a href="?page={{products.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+
+                                {% else %}
+
+								<li style="pointer-events:none;"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+
+                                {% endif %}
+
+                                {% for num in products.paginator.page_range %} 
+
+								  {% if products.number == num %}
+
+								      <li class="active">{{num}}</li>
+									
+								  {% else %}
+      
+	                                  <li><a href="?page={{num}}">{{num}}</a></li>
+								      
+                                  {% endif %}
+
+								{% endfor %}
+
+								{% if products.has_next %}
+
+								
+								<li><a href="?page={{products.next_page_number}}"><i class="fa fa-angle-right"></i></a></li>
+
+								{% else%}
+
+								<li style="pointer-events:none;"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+								{% endif %}
+							</ul>
+							{% endif %}
+						</div>
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+
+{% endblock content %}
+>>>>>>> b51fca373ef4c1955ba4b56ca69a5ca1fb93be60
