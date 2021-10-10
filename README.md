@@ -88,6 +88,8 @@ Password: `mytek2021`
 
 - Django-filter Backend
 
+![mytech.gif](https://github.com/IT-Support-L2/mytek/blob/main/mytechAPI.gif)
+
 ### CACHE
 
 - Default Django Cache Middleware 
