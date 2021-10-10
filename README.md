@@ -84,6 +84,14 @@ Password: `mytek2021`
 - Python-decouple
 - Admin Honeypot
 
+### Django Rest Framework API
+
+- Django-filter Backend
+
+### CACHE
+
+- Default Django Cache Middleware 
+
 ### Project live demo is served with:
 
 - `Heroku web server` with Heroku CLI
@@ -97,9 +105,7 @@ Password: `mytek2021`
 
 ### Project Next Functionalities
 
-- API
 - MFA
-- CACHE
 - Sub-Categories
 - Live Chat Support
 - Change Email address
