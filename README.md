@@ -92,7 +92,7 @@ Password: `mytek2021`
 
 ### CACHE
 
-- Default Django Cache Middleware 
+- Per-view cache
 
 ### Project live demo is served with:
 
