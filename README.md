@@ -105,9 +105,9 @@ Password: `mytek2021`
 - https://mytek.herokuapp.com
 
 ### API URLs
--  https://mytek.herokuapp.com/products
--  https://mytek.herokuapp.com/reviews
--  https://mytek.herokuapp.com/orders-products
+-  https://mytek.herokuapp.com/api/products
+-  https://mytek.herokuapp.com/api/reviews
+-  https://mytek.herokuapp.com/api/orders-products
 
 
 ### Project Next Functionalities
