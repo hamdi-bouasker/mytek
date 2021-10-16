@@ -101,7 +101,6 @@ Password: `mytek2021`
 - Copy paste this command `docker-compose up` and hit enter
 - Open your browser and go to `127.0.0.1:8000` and not to `0.0.0.0:8000` 😁
 
-You can change `project-name` to whatever name you like
 
 ### Project live demo is served with:
 
