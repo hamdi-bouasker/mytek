@@ -94,6 +94,13 @@ Password: `mytek2021`
 
 - Per-view cache
 
+### Run the project inside local `Docker container`
+
+- `docker build --tag project-name .`
+- `docker run --publish 8000:8000 project-name`
+
+You can change `project-name` to whatever name you like
+
 ### Project live demo is served with:
 
 - `Heroku web server` with Heroku CLI
