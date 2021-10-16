@@ -94,10 +94,11 @@ Password: `mytek2021`
 
 - Per-view cache
 
-### Run the project inside local `Docker container`
+### Run the project from `Docker container`
 
-- `docker build --tag project-name .`
-- `docker run --publish 8000:8000 project-name`
+- `docker-compose build`
+- `docker-compose up`
+- Open your browser and go to `127.0.0.1:8000` and not to `0.0.0.0:8000`
 
 You can change `project-name` to whatever name you like
 
