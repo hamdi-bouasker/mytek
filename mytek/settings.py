@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 
     # my apps
     'accounts',
@@ -27,7 +28,9 @@ INSTALLED_APPS = [
     'category',
     'cart',
     'orders',
+    'api',
     'admin_honeypot',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -40,6 +43,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ],
+}
 
 SESSION_EXPIRE_SECONDS = 900  # 15 minutes
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
