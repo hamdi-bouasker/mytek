@@ -92,8 +92,7 @@ Password: `mytek2021`
 
 ### CACHE
 
-- Per-view cache
-
+- Per-view cache: Deleted as it caused Cart Items are not synchronized on all pages. Working on different CACHE integration.
 ### Run the project from `Docker container`
 
 - Navigate to the project root directory
