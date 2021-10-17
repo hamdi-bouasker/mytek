@@ -1,6 +1,5 @@
 
 from django.shortcuts import render, redirect
-from django.views.decorators.cache import cache_page
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
@@ -152,7 +151,6 @@ def reset_password(request):
     else:
         return render(request, 'accounts/reset_password.html')
 
-@cache_page(60 * 15)
 @login_required
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
@@ -162,7 +160,6 @@ def dashboard(request):
     }
     return render(request, 'accounts/dashboard.html', context)
 
-@cache_page(60 * 15)
 @login_required
 def my_orders(request):
     orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
@@ -215,7 +212,6 @@ def change_password(request):
 
     return render(request, 'accounts/change_password.html')
 
-@cache_page(60 * 15)
 @login_required
 def order_detail(request, order_id):
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
