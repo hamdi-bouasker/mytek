@@ -109,12 +109,21 @@ Password: `mytek2021`
 
 ### Project Live Demo URL
 
+#### Heroku
 - https://mytek.herokuapp.com
 
-### API URLs
+#### API URLs
 -  https://mytek.herokuapp.com/api/products
 -  https://mytek.herokuapp.com/api/reviews
 -  https://mytek.herokuapp.com/api/orders-products
+
+#### AWS Elastic Beanstalk
+- http://mytek-env.us-west-1.elasticbeanstalk.com
+
+#### API URLs
+-  http://mytek-env.us-west-1.elasticbeanstalk.com/api/products
+-  http://mytek-env.us-west-1.elasticbeanstalk.com/api/reviews
+-  http://mytek-env.us-west-1.elasticbeanstalk.com/api/orders-products
 
 
 ### Project Next Functionalities
