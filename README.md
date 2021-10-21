@@ -121,12 +121,12 @@ Password: `mytek2021`
 - Project deployed using awsebcli
 - I used additional S3 Bucket as staticfiles storage independently from the default Elastic Beanstalk one.
 
-- http://mytek-env.us-west-1.elasticbeanstalk.com
+- mytek-env.us-west-1.elasticbeanstalk.com
 
 #### API URLs
--  http://mytek-env.us-west-1.elasticbeanstalk.com/api/products
--  http://mytek-env.us-west-1.elasticbeanstalk.com/api/reviews
--  http://mytek-env.us-west-1.elasticbeanstalk.com/api/orders-products
+-  mytek-env.us-west-1.elasticbeanstalk.com/api/products
+-  mytek-env.us-west-1.elasticbeanstalk.com/api/reviews
+-  mytek-env.us-west-1.elasticbeanstalk.com/api/orders-products
 
 
 ### Project Next Functionalities
