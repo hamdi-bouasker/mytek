@@ -156,7 +156,27 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # for AWS Elastic Beanstalk Deploy
 
-# In project directory, create a file storage_backends.py and add the following
+# After added DB credentials, while local venv is activated run python manage.py makemigrations
+
+# Then git add -A and git commit
+
+# In project root directory, create a folder called .ebextensions, inside it create a file called django.config and add
+
+# option_settings:
+  # aws:elasticbeanstalk:application:environment:
+    # DJANGO_SETTINGS_MODULE: "mytech.settings"
+    # PYTHONPATH: "/var/app/current:$PYTHONPATH"
+  # aws:elasticbeanstalk:container:python:
+    # WSGIPath: "mytech.wsgi:application"
+# container_commands:
+  # 01_migrate:
+    # command: "source /var/app/venv/*/bin/activate && python3 manage.py migrate --noinput"
+    # leader_only: true
+  # 02_collectstatic:
+    # command: "source /var/app/venv/*/bin/activate && python3 manage.py collectstatic --noinput"
+    # leader_only: true
+
+# Inside project directory, create a file storage_backends.py and add the following
 
 # from django.conf import settings
 # from storages.backends.s3boto3 import S3Boto3Storage
