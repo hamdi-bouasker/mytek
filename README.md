@@ -118,6 +118,9 @@ Password: `mytek2021`
 -  https://mytek.herokuapp.com/api/orders-products
 
 #### AWS Elastic Beanstalk
+- Project deployed using awsebcli
+- I used additional S3 Bucket as staticfiles storage independently from the default Elastic Beanstalk one.
+
 - http://mytek-env.us-west-1.elasticbeanstalk.com
 
 #### API URLs
