@@ -92,8 +92,7 @@ Password: `mytek2021`
 
 ### CACHE
 
-- Per-view cache
-
+- Per-view cache: Deleted as it caused Cart Items are not synchronized on all pages. Working on different CACHE integration.
 ### Run the project from `Docker container`
 
 - Navigate to the project root directory
@@ -110,12 +109,24 @@ Password: `mytek2021`
 
 ### Project Live Demo URL
 
+#### Heroku
 - https://mytek.herokuapp.com
 
-### API URLs
+#### API URLs
 -  https://mytek.herokuapp.com/api/products
 -  https://mytek.herokuapp.com/api/reviews
 -  https://mytek.herokuapp.com/api/orders-products
+
+#### AWS Elastic Beanstalk
+- Project deployed using awsebcli
+- I used additional S3 Bucket as staticfiles storage independently from the default Elastic Beanstalk one.
+
+- http://mytek-env.us-west-1.elasticbeanstalk.com
+
+#### API URLs
+-  http://mytek-env.us-west-1.elasticbeanstalk.com/api/products
+-  http://mytek-env.us-west-1.elasticbeanstalk.com/api/reviews
+-  http://mytek-env.us-west-1.elasticbeanstalk.com/api/orders-products
 
 
 ### Project Next Functionalities

@@ -154,3 +154,59 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+# for AWS Elastic Beanstalk Deploy
+
+# After added DB credentials, while local venv is activated run python manage.py makemigrations
+
+# Then git add -A and git commit
+
+# In project root directory, create a folder called .ebextensions, inside it create a file called django.config and add
+
+# option_settings:
+  # aws:elasticbeanstalk:application:environment:
+    # DJANGO_SETTINGS_MODULE: "mytech.settings"
+    # PYTHONPATH: "/var/app/current:$PYTHONPATH"
+  # aws:elasticbeanstalk:container:python:
+    # WSGIPath: "mytech.wsgi:application"
+# container_commands:
+  # 01_migrate:
+    # command: "source /var/app/venv/*/bin/activate && python3 manage.py migrate --noinput"
+    # leader_only: true
+  # 02_collectstatic:
+    # command: "source /var/app/venv/*/bin/activate && python3 manage.py collectstatic --noinput"
+    # leader_only: true
+
+# Inside project directory, create a file storage_backends.py and add the following
+
+# from django.conf import settings
+# from storages.backends.s3boto3 import S3Boto3Storage
+
+# class StaticStorage(S3Boto3Storage):
+    # location = 'static'
+    # default_acl = 'public-read'
+
+
+# class PublicMediaStorage(S3Boto3Storage):
+    # location = 'media'
+    # default_acl = 'public-read'
+    # file_overwrite = False
+    
+# In settings.py, add the following, to use additional S3 Bucket as staticfiles storage independently from the default 
+# Elastic Beanstalk S3 bucket
+
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+# AWS_DEFAULT_ACL = None
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+# s3 static settings
+# STATIC_LOCATION = 'static'
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# STATICFILES_STORAGE = 'mytech.storage_backends.StaticStorage'
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, STATIC_LOCATION),)
+# s3 public media settings
+# PUBLIC_MEDIA_LOCATION = 'media'
+# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+# DEFAULT_FILE_STORAGE = 'mytech.storage_backends.PublicMediaStorage'
