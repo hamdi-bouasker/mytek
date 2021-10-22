@@ -78,6 +78,17 @@ Password: `mytek2021`
 - `Order receipt`
 - Use your customer paypal sanboxed email address to test payment
 
+### Newsletter
+
+- Customer is able to subscribe to newsletter regardless of being registered or not.
+- Above the footer, input your email address in the subscribe form and click on `subscribe`.
+
+### Modal Contact Form
+
+- Customer is able to send message regardless of being registered or not.
+
+- In the footer menu, click on `Contact`.
+
 
 ### Admin Functionalities
 
