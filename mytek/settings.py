@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'cart',
     'orders',
     'api',
+    'newsletter',
     'admin_honeypot',
     'django_filters',
 ]

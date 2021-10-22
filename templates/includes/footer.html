@@ -6,11 +6,13 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="newsletter">
+						{% include 'includes/alerts.html' %}
 							<p>Stay tuned to upcoming discount events by signing up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
+							<form action="{% url 'subscribe' %}" method='POST'>
+							{% csrf_token %}
+								<input class="input" type="email" name="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn" type="submit"><i class="fa fa-envelope"></i> Subscribe</button>
+                            </form>
 							<ul class="newsletter-follow">
 								<li>
 									<a href="#"><i class="fa fa-facebook"></i></a>
@@ -50,7 +52,6 @@
 									<li><a href="https://g.page/DjangoGuitars?share" target="_blank"><i class="fa fa-map-marker"></i>Get Directions </a></li>
 									<li><a href="tel:+012456789"><i class="fa fa-phone"></i>Call us</a></li>
 									<li><a href="mailto:email@example.com"><i class="fa fa-envelope-o"></i>Email us</a></li>
-									<li><a href="https://github.com/IT-Support-L2/mytek" target="_blank"> <i class="fa fa-github" id="githubnav"></i> Project Repo</a></li>
 								</ul>
 							</div>
 						</div>
@@ -72,15 +73,49 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">About Us</a></li>									
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal">Contact us</a>
+									<div class="container">
+									<!-- Modal -->
+									<div class="modal fade" id="myModal" role="dialog">
+										<div class="modal-dialog">										
+										<!-- Modal content-->
+										<div class="modal-content">
+									
+											<div class="modal-body">
+											<form action="{% url 'contact_me' %}" method='POST'>
+											{% csrf_token %}
+											<div class="form-group">
+												<label for="email" class="col-form-label" style="color:black">Email</label>
+												<input type="email" name="email" class="form-control" id="email">
+											</div>
+											<div class="form-group">
+												<label for="title" class="col-form-label" style="color:black">Title</label>
+												<input type="text" name="title" class="form-control" id="title">
+											</div>
+											<div class="form-group">
+												<label for="body" class="col-form-label" style="color:black">Message</label>
+												<textarea class="form-control" type="text" name="body" id="body"></textarea>
+											</div>
+											
+										</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal"  style="background-color:black; color:red; border-color: #D10024;">Close</button>
+											
+											<button type="submit" class="btn btn-primary"  style="background-color:black; color:red; border-color: #D10024;">Send message</button>					   
+										</div>
+										</form>
+										</div>										
+										</div>
+									</div>									
+									</div>
+									</li>
 									<li><a href="#">Privacy Policy</a></li>
 									<li><a href="#">Orders and Returns</a></li>
 									<li><a href="#">Terms & Conditions</a></li>
 								</ul>
 							</div>
 						</div>
-
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
