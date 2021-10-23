@@ -144,6 +144,7 @@ Password: `mytek2021`
 
 - MFA
 - Sub-Categories
+- Elasticsearch
 - Live Chat Support
 - Change Email address
 - Automated email alert once the stock reached 10 pieces as exemple
