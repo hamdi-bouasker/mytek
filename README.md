@@ -146,7 +146,6 @@ Password: `mytek2021`
 - Sub-Categories
 - Live Chat Support
 - Change Email address
-- Newsletter
 - Automated email alert once the stock reached 10 pieces as exemple
 - The most feature I am very interested to implement, is: Automated live analytics with automated daily report sent to admin or store owner email address. 
 
