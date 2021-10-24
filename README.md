@@ -149,3 +149,8 @@ Password: `mytek2021`
 - Change Email address
 - Automated email alert once the stock reached 10 pieces as exemple
 - The most feature I am very interested to implement, is: Automated live analytics with automated daily report sent to admin or store owner email address. 
+
+
+## Next Django Project
+
+Advqnced Hotel Management System of all its departments: Front office, Back office, Bar, Restaurant, Night club, Beach Bar, Housekeeping, Accounting. つづく 😉
