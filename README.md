@@ -153,4 +153,4 @@ Password: `mytek2021`
 
 ## Next Django Project
 
-Advanced Hotel Management System: Front office, Back office, Bar, Restaurant, Night club, Beach Bar, Housekeeping, Accounting. つづく 😉
+Advanced Hotel Management System: Front office, Back office, Bar, Restaurant, Night club, Beach Bar, Housekeeping, Accounting, Analytics. つづく 😉
