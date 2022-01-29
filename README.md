@@ -113,4 +113,4 @@ Password: `mytek2021`
 
 ### Project Live demo was served with Heroku and AWS Elastic Beanstalk but due charges I decided to stop it.
 
-### Lots of advanced functionalities will be offered through a udemy course, stay tuned! 
+### You have to set few configurations and settings in order to successfully run the project.
