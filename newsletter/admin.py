@@ -8,5 +8,5 @@ class SubscribeAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     readonly_fields = ('email', 'created_at')
   
-admin.site.register(SubscribeAdmin, Subscribe)
-admin.site.register(ContactAdmin, Contact)
+admin.site.register(Subscribe,SubscribeAdmin)
+admin.site.register(Contact,ContactAdmin)

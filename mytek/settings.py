@@ -102,7 +102,7 @@ else:
         "USER": config('USER'),
         "PASSWORD": config('PASSWORD'),
         "HOST": config('HOST'),
-        "PORT": config('PORT),
+        "PORT": config('PORT'),
     }
 }
 
