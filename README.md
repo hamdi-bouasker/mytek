@@ -2,7 +2,7 @@
 
 ### Django e-commerce website with Advanced Features and SEO Friendly
 
-![mytech.gif](https://github.com/hamdi-bouasker/mytek/blob/main/mytechAPI.gif)
+![mytech.gif](https://github.com/hamdi-bouasker/mytek/blob/main/mytech.gif)
 
 ### Images and Prices are only used for Demo purpose and does not reflect real products! 
 
